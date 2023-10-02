@@ -13,7 +13,7 @@ const Navbar = () => {
   useEffect(() => {
     // Google Analytics
     // ga('send', 'pageview');
-    console.log(location)
+    // console.log(location)
   }, [location]);
   return (
     <>
