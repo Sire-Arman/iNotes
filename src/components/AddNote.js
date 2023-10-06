@@ -42,7 +42,7 @@ const AddNote = () => {
             />
           </div>
           <div className="form-group my-3">
-            <label htmlFor="description">Tag</label>
+            <label htmlFor="tag">Tag</label>
             <input
               type="text"
               className="form-control my-2"
