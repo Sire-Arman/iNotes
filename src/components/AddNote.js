@@ -9,6 +9,7 @@ const AddNote = () => {
     const handleClick = (e)=>{
         e.preventDefault();
         addNotes(note.title, note.description,note.tag);
+        setNote({title:"", description:"", tag :""});
     }
     const onChange= (e)=>{
         setNote({...note, [e.target.name] : e.target.value})
@@ -25,9 +26,12 @@ const AddNote = () => {
               className="form-control my-2"
               id="title"
               name="title"
+              value = {note.title}
               aria-describedby="emailHelp"
               placeholder="Title"
               onChange={onChange}
+              minLength={5}
+              required= {true}
             />
           </div>
           <div className="form-group my-3">
@@ -37,8 +41,11 @@ const AddNote = () => {
               className="form-control my-2"
               id="description"
               name="description"
+              value = {note.description}
               placeholder="Description"
               onChange={onChange}
+              minLength={5}
+              required= {true}
             />
           </div>
           <div className="form-group my-3">
@@ -46,13 +53,14 @@ const AddNote = () => {
             <input
               type="text"
               className="form-control my-2"
-              id="tag"
+              id="tag" 
               name="tag"
+              value = {note.tag}
               placeholder="Tag"
               onChange={onChange}
             />
           </div>
-          <button type="submit" className="btn btn-primary" onClick={handleClick}>
+          <button disabled ={note.title.length<5 || note.description.length<5} type="submit" className="btn btn-primary" onClick={handleClick}>
             Add Note
           </button>
         </form>

@@ -24,7 +24,7 @@ const NoteState = (props) => {
     setNotes(json);
   };
   // Add a Note
-  const addNotes = async (title, description, tag, id) => {
+  const addNotes = async (title, description, tag) => {
     // API call;
     // eslint-disable-next-line
     const response = await fetch(`${host}/api/notes/addnotes`, {
@@ -37,17 +37,7 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
-    // const json = await response.json();
-    const note = {
-      "_id": `${id}`,
-      "user": "6131dc5e3e4037cd4734a0664",
-      "title": title,
-      "description": description,
-      "tag": tag,
-      "date": "2021-09-03T14:20:09.668Z",
-      "__v": 0
-    };
-    // console.log("adding "+note._id)
+    const note = await response.json();
     setNotes(notes.concat(note))
   };
   // Delete a Note

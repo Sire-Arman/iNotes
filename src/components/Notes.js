@@ -77,6 +77,8 @@ const Notes = () => {
               placeholder="Title"
               value = {note.etitle}
               onChange={onChange}
+              minLength={5}
+              required= {true}
             />
           </div>
           <div className="form-group my-3">
@@ -89,6 +91,8 @@ const Notes = () => {
               placeholder="Description"
               value = {note.edescription}
               onChange={onChange}
+              minLength={5}
+              required= {true}
             />
           </div>
           <div className="form-group my-3">
@@ -115,7 +119,7 @@ const Notes = () => {
               >
                 Close
               </button>
-              <button type="button" className="btn btn-primary" onClick={handleClick}>
+              <button disabled ={note.etitle.length<5 || note.edescription.length<5} type="button" className="btn btn-primary" onClick={handleClick}>
                 Update Note
               </button>
             </div>
