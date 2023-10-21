@@ -34,9 +34,9 @@ const Login = () => {
     setCredentials({...credentials, [e.target.name] : e.target.value})
 }
   return (
-    <div>
+    <div className="container">
       <form onSubmit={handlesubmit}>
-        <div className="form-group">
+        <div className="form-group my-3">
           <label htmlFor="email">Email address</label>
           <input
             type="email"
@@ -52,7 +52,7 @@ const Login = () => {
             We'll never share your email with anyone else.
           </small>
         </div>
-        <div className="form-group">
+        <div className="form-group my-3">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -64,7 +64,7 @@ const Login = () => {
             placeholder="Password"
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary my-3">
           Submit
         </button>
       </form>

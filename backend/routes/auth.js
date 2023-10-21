@@ -6,6 +6,9 @@ const router = express.Router();
 const JWt_secret = "armanistheOG@";
 const fetchuser = require("../middlewares/fetchuser");
 const { body, validationResult } = require("express-validator");
+
+
+
 //1: Creaing a user /api/auth/createuser
 router.post(
   "/createuser",
@@ -15,19 +18,22 @@ router.post(
     body("email", "enter a valid email").isEmail(),
   ],
   async (req, res) => {
+    let success = false;
     // If errors are found, return BAD request along with the error.
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+        success=false;
+        return res.status(400).json({ success,errors: errors.array() });
       }
       // check whether email is unique or not
 
       let user = await User.findOne({ email: req.body.email });
       if (user) {
+        success = false;
         return res
           .status(400)
-          .json({ error: "Sorry a user already exists with that email" });
+          .json({ sucess,error: "Sorry a user already exists with that email" });
       }
       //   user is being created
       const salt = await bcrypt.genSalt(10);
@@ -49,7 +55,8 @@ router.post(
       };
       const authtoken = jwt.sign(data, JWt_secret);
       //   console.log(jwtData);
-      res.send({ authtoken });
+      success=true;
+      res.send({ success,authtoken });
     } catch (error) {
       // catch will look any unidentifiable error and displays a custom message
       console.log(error.message);
