@@ -47,7 +47,7 @@ router.post(
       // catch will look any unidentifiable error and displays a custom message
       console.log(error.message);
       // res.status sends a bad request along with a message
-      res.status(500).json({ error: "Internal Server Error Occured!" });
+      res.status(500).json({ error: "Internal Server Error occured!" });
     }
   }
 );
