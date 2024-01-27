@@ -12,7 +12,7 @@ const Signup = (props) => {
   const handlesubmit = async (e) => {
     e.preventDefault();
     const {name,email,password,confirmpassword}= credentials;
-    const response = await fetch("https://i-notes-tau.vercel.app/api/auth/createuser", {
+    const response = await fetch("http://localhost:5000/api/auth/createuser", {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json"

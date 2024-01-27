@@ -8,7 +8,7 @@ const port = 5000
 var cors = require('cors')
 
 app.use(cors({
-  origin:["https://i-notes-frontend.vercel.app"],
+  origin:[],
   method : ["POST", "GET"],
   credentials : true,
 }))
