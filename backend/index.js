@@ -15,7 +15,12 @@ const port = 5000
 //   method : ["POST", "GET","PUT","PATCH","DELETE"],
 //   credentials : true,
 // }))
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'https://i-notes-frontend.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 // Creating routes
 app.use(json());
 app.use('/api/auth',authRoutes);
