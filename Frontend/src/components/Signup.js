@@ -14,27 +14,36 @@ const Signup = (props) => {
 
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const {name,email,password,confirmpassword}= credentials;
-    const response = await fetch(`${host}/api/auth/createuser`, {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name,email,password
-      }),
-    });
-    const json = await response.json();
-    console.log(confirmpassword);
-    // console.log(json);
-    if(json.success){
-      //  redirect
-      localStorage.setItem("token", json.authtoken);
-      navigate("/");
-      props.showAlert("Account created successfully","success");
+    try{
+      const {name,email,password,confirmpassword}= credentials;
+      const response = await fetch(`${host}/api/auth/createuser`, {
+        method: "POST", // *GET, POST, PUT, DELETE, etc.
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name,email,password
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const json = await response.json();
+      // console.log(confirmpassword);
+      console.log(json);
+      if(json.success){
+        //  redirect
+        localStorage.setItem("token", json.authtoken);
+        navigate("/");
+        props.showAlert("Account created successfully","success");
+      }
+      else{
+        props.showAlert("Invalid Credentials","danger");
+      }
     }
-    else{
-      props.showAlert("Invalid Credentials","danger");
+    catch(error){
+      console.error("There was a problem with the fetch operation:", error);
+    props.showAlert("An error occurred. Please try again.","danger");
     }
 }
   const onChange = (e) => {
