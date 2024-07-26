@@ -1,21 +1,25 @@
 const connectToMongo = require('./db');
 const express = require('express');
+const {json} = require('express');
+const authRoutes = require('./routes/auth');
+const notesRoutes = require('./routes/notes');
+const cors = require('cors');
 
 
 connectToMongo();
 const app = express()
 const port = 5000
-var cors = require('cors')
 
-app.use(cors({
-  origin:[],
-  method : ["POST", "GET"],
-  credentials : true,
-}))
+// app.use(cors({
+//   origin:[],
+//   method : ["POST", "GET","PUT","PATCH","DELETE"],
+//   credentials : true,
+// }))
+app.use(cors());
 // Creating routes
-app.use(express.json());
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/notes', require('./routes/notes'));
+app.use(json());
+app.use('/api/auth',authRoutes);
+app.use('/api/notes', notesRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello  arman!')

@@ -2,8 +2,11 @@ const express = require("express");
 const router = express.Router();
 const Notes = require("../models/Notes");
 const { body, validationResult } = require("express-validator");
-
 const fetchuser = require("../middlewares/fetchuser");
+const cors = require('cors');
+
+
+router.use(cors());
 
 // Route 1: get all the notes using GET  /apo/notes/fetchallnotes
 router.get("/fetchallnotes", fetchuser, async (req, res) => {

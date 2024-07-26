@@ -6,9 +6,10 @@ const router = express.Router();
 const JWt_secret = "armanistheOG@";
 const fetchuser = require("../middlewares/fetchuser");
 const { body, validationResult } = require("express-validator");
+const cors = require('cors');
 
 
-
+router.use(cors());
 //1: Creaing a user /api/auth/createuser
 router.post(
   "/createuser",
@@ -33,7 +34,7 @@ router.post(
         success = false;
         return res
           .status(400)
-          .json({ sucess,error: "Sorry a user already exists with that email" });
+          .json({ success,error: "Sorry a user already exists with that email" });
       }
       //   user is being created
       const salt = await bcrypt.genSalt(10);
