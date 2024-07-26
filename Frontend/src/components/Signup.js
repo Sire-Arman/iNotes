@@ -9,10 +9,13 @@ const Signup = (props) => {
     confirmpassword: "",
   });
   const navigate = useNavigate();
+  const host = "https://i-notes-tau.vercel.app";
+  // const host = "http://localhost:5000";
+
   const handlesubmit = async (e) => {
     e.preventDefault();
     const {name,email,password,confirmpassword}= credentials;
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST", // *GET, POST, PUT, DELETE, etc.
       headers: {
         "Content-Type": "application/json"

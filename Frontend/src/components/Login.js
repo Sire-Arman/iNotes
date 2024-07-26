@@ -6,32 +6,38 @@ const Login = (props) => {
   // const [password, setPassword] = useState("");
   const [credentials, setCredentials] = useState({email: "",password:""})
   const navigate = useNavigate();
-
-
+  const host = "https://i-notes-tau.vercel.app";
+  // const host = "http://localhost:5000";
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST", // *GET, POST, PUT, DELETE, etc.
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token":
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjUwMzNkMzNiMTU5Y2Q3NTdjYjllZjllIn0sImlhdCI6MTY5NDcxMTA5MX0.WV4NokptgIe3PjrYdVlICg0eVU8KAA5dNLwPl6x4YlE",
-      },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password}),
-    });
-    const json = await response.json();
-    console.log(json);
-    if(json.success){
-      // redirect
-      localStorage.setItem('token',json.authtoken);
-      props.showAlert("Logged In Successfully","success");
-      navigate("/");
+    try {
+        const response = await fetch(`${host}/api/auth/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                // Remove the hardcoded auth-token from here
+            },
+            body: JSON.stringify({ 
+                email: credentials.email, 
+                password: credentials.password
+            }),
+        });
+
+        const json = await response.json();
+        console.log(json);
+
+        if (json.success) {
+            localStorage.setItem('token', json.authtoken);
+            props.showAlert("Logged In Successfully", "success");
+            navigate("/");
+        } else {
+            props.showAlert("Invalid Credentials", "danger");
+        }
+    } catch (error) {
+        console.error("Login error:", error);
+        props.showAlert("An error occurred during login", "danger");
     }
-    else{
-      // alert("invalid details");
-      props.showAlert("Invalid Credentials","danger");
-    }
-  }
+}
   const onChange= (e)=>{
     setCredentials({...credentials, [e.target.name] : e.target.value})
 }
