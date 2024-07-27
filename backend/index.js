@@ -41,7 +41,7 @@ app.use('/api/notes', notesRoutes);
 app.get('/', (req, res) => {
   res.send('Hello  arman!')
 })
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+module.exports = app;
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
