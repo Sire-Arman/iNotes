@@ -15,25 +15,25 @@ const port = 5000
 //   method : ["POST", "GET","PUT","PATCH","DELETE"],
 //   credentials : true,
 // }))
-app.use(cors());
+// app.use(cors());
 // app.use(cors({
 //   origin: 'https://i-notes-frontend.vercel.app',
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 // CORS configuration
-// const corsOptions = {
-//   origin: ['https://i-notes-frontend.vercel.app','http://localhost:3000'],
-//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-//   credentials: true,
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// };
+const corsOptions = {
+  origin: ['https://i-notes-frontend.vercel.app','http://localhost:3000'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Pre-flight request handling
-// app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions));
 // Creating routes
 app.use(json());
 app.use('/api/auth',authRoutes);
