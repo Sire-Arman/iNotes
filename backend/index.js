@@ -23,7 +23,7 @@ const port = 5000
 // }));
 // CORS configuration
 const corsOptions = {
-  origin: ['https://i-notes-frontend.vercel.app','http://localhost:3000'],
+  origin: ['https://i-notes-frontend.vercel.app'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
