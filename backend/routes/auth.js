@@ -6,10 +6,10 @@ const router = express.Router();
 const JWt_secret = "armanistheOG@";
 const fetchuser = require("../middlewares/fetchuser");
 const { body, validationResult } = require("express-validator");
-const cors = require('cors');
+// const cors = require('cors');
 
 
-router.use(cors());
+// router.use(cors());
 //1: Creaing a user /api/auth/createuser
 router.post(
   "/createuser",
