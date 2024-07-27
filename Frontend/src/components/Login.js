@@ -30,12 +30,13 @@ const Login = (props) => {
             localStorage.setItem('token', json.authtoken);
             props.showAlert("Logged In Successfully", "success");
             navigate("/");
-        } else {
-            props.showAlert("Invalid Credentials", "danger");
-        }
+        } 
+        // else {
+        //     props.showAlert("Invalid Credentials", "danger");
+        // }
     } catch (error) {
         console.error("Login error:", error);
-        props.showAlert("An error occurred during login", "danger");
+        // props.showAlert("An error occurred during login", "danger");
     }
 }
   const onChange= (e)=>{
