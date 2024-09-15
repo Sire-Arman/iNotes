@@ -9,8 +9,8 @@ const Signup = (props) => {
     confirmpassword: "",
   });
   const navigate = useNavigate();
-  const host = "https://i-notes-tau.vercel.app";
-  // const host = "http://localhost:5000";
+  // const host = "https://i-notes-tau.vercel.app";
+  const host = "http://localhost:5000";
 
   const handlesubmit = async (e) => {
     e.preventDefault();
