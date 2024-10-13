@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import NoteContext from "../context/notes/NoteContext";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
+import './Login.css'
 
 const Notes = (props) => {
   const context = useContext(NoteContext);
@@ -50,7 +51,7 @@ const Notes = (props) => {
 
 
   return (
-    <>
+    <div className="dynamic-bg d-block">
       <AddNote showAlert={showAlert}/>
       {/* <!-- Button trigger modal --> */}
       <button ref ={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -149,7 +150,7 @@ const Notes = (props) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

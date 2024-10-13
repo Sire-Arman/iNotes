@@ -1,0 +1,32 @@
+/* Navbar.css */
+
+/* Ensure the navbar is fixed at the top and has no gap with the body */
+body {
+    padding-top: 56px; /* Height of the fixed navbar */
+  }
+  
+  .navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+  }
+  
+  /* Optional: Add hover effects for better interactivity */
+  .nav-link:hover {
+    color: #ffdd57 !important; /* Change color on hover */
+  }
+  
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem; /* Larger font for brand */
+  }
+  
+  /* Style the buttons */
+  .btn-outline-light {
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-outline-light:hover {
+    background-color: white;
+    color: #1c1d1e;
+  }
+  

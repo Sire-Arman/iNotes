@@ -1,15 +1,20 @@
-import React, { useState} from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Form, Input, Button } from 'antd';
+import './Login.css';
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import ButtonGroup from "antd/es/button/button-group";
 
 const Login = (props) => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  const [credentials, setCredentials] = useState({email: "",password:""})
   const navigate = useNavigate();
-  // const host = "https://i-notes-tau.vercel.app";
+  const [form] = Form.useForm();
+  const particlesInit = async (main) => {
+    await loadFull(main);
+  };
   const host = "http://localhost:5000";
-  const handlesubmit = async (e) => {
-    e.preventDefault();
+
+  const handleSubmit = async (values) => {
     try {
         const response = await fetch(`${host}/api/auth/login`, {
             method: "POST",
@@ -17,8 +22,8 @@ const Login = (props) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({ 
-                email: credentials.email, 
-                password: credentials.password
+                email: values.email, 
+                password: values.password
             }),
         });
 
@@ -29,53 +34,64 @@ const Login = (props) => {
             localStorage.setItem('token', json.authtoken);
             props.showAlert("Logged In Successfully", "success");
             navigate("/");
-        } 
-        // else {
-        //     props.showAlert("Invalid Credentials", "danger");
-        // }
+        } else {
+            props.showAlert("Invalid Credentials", "danger");
+        }
     } catch (error) {
         console.error("Login error:", error);
-        // props.showAlert("An error occurred during login", "danger");
+        props.showAlert("An error occurred during login", "danger");
     }
-}
-  const onChange= (e)=>{
-    setCredentials({...credentials, [e.target.name] : e.target.value})
-}
+  }
+
   return (
-    <div className="container">
-      <form onSubmit={handlesubmit}>
-        <div className="form-group my-3">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            value= {credentials.email}
-            id="email"
-            name="email"
-            onChange={onChange}
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-          />
-          <small id="emailHelp" className="form-text text-muted">
-            We'll never share your email with anyone else.
-          </small>
-        </div>
-        <div className="form-group my-3">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            className="form-control"
-            value = {credentials.password}
-            id="password"
-            name="password"
-            onChange={onChange}
-            placeholder="Password"
-          />
-        </div>
-        <button type="submit" className="btn btn-primary my-3">
-          Submit
-        </button>
-      </form>
+    <div className="dynamic-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', textAlign: 'center' }}>
+  <h2 className="d-flex" style={{ marginBottom: '20px' }}>
+    iNotes welcomes you, Please Log in to continue.
+  </h2>
+  <div className="container" style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <Form
+        form={form}
+        onFinish={handleSubmit}
+        layout="vertical"
+        autoComplete="off"
+      >
+        {/* Email Field */}
+        <Form.Item
+          label="Email Address"
+          name="email"
+          rules={[
+            {
+              required: true,
+              type: 'email',
+              message: 'Please enter a valid email address',
+            },
+          ]}
+        >
+          <Input placeholder="Enter email" />
+        </Form.Item>
+
+        {/* Password Field */}
+        <Form.Item
+          label="Password"
+          name="password"
+          rules={[
+            {
+              required: true,
+              message: 'Please enter your password',
+            },
+          ]}
+        >
+          <Input.Password placeholder="Enter password" />
+        </Form.Item>
+
+        {/* Submit Button */}
+        <Form.Item>
+          <Button type="primary" htmlType="submit" block>
+            Submit
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
     </div>
   );
 };
