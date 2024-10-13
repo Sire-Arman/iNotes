@@ -5,6 +5,8 @@ import './Login.css';
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 import ButtonGroup from "antd/es/button/button-group";
+import logo from './logo-no-background.png'
+// require('dotenv').config();
 
 const Login = (props) => {
   const navigate = useNavigate();
@@ -12,8 +14,10 @@ const Login = (props) => {
   const particlesInit = async (main) => {
     await loadFull(main);
   };
-  const host = "http://localhost:5000";
-
+  // const host = process.env.REACT_APP_PORT;
+  const host = "https://vercel.live/link/i-notes-backend-2.vercel.app?via=project-dashboard-alias-list&p=1";
+  // const host = "http://localhost:5000";
+  console.log(host)
   const handleSubmit = async (values) => {
     try {
         const response = await fetch(`${host}/api/auth/login`, {
@@ -44,10 +48,24 @@ const Login = (props) => {
   }
 
   return (
-    <div className="dynamic-bg" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', flexDirection: 'column', textAlign: 'center' }}>
-  <h2 className="d-flex" style={{ marginBottom: '20px' }}>
-    iNotes welcomes you, Please Log in to continue.
-  </h2>
+    <div  className="dynamic-bg"
+    style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      flexDirection: 'column',
+      textAlign: 'center',
+      padding: '0 20px', // Added padding for small screens
+    }}
+  >
+    {/* Logo */}
+    <img src={logo} alt="Logo" style={{ marginBottom: '20px', width: '300px' }} />
+  
+    {/* Heading */}
+    <h2 style={{ marginBottom: '20px', fontWeight: 'bold' }}>
+      iNotes welcomes you, Please Log in to continue.
+    </h2>
   <div className="container" style={{ maxWidth: '400px', margin: '0 auto' }}>
       <Form
         form={form}

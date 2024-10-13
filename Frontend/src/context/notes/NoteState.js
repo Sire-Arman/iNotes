@@ -1,9 +1,14 @@
 import { useState } from "react";
 import NoteContext from "./NoteContext";
+// require('dotenv').config();
 
 const NoteState = (props) => {
   // const host = "https://i-notes-tau.vercel.app";
-  const host = "http://localhost:5000"
+  // const host = process.env.REACT_APP_PORT;
+  const host = "https://vercel.live/link/i-notes-backend-2.vercel.app?via=project-dashboard-alias-list&p=1";
+  // const host = "http://localhost:5000";
+
+  console.log(host)
   const notesInitial = [];
 
   const [notes, setNotes] = useState(notesInitial);

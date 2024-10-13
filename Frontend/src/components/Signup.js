@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form, Input, Button } from 'antd';
-
+// require('dotenv').config();
 const Signup = (props) => {
   const [credentials, setCredentials] = useState({
     name: "",
@@ -12,9 +12,11 @@ const Signup = (props) => {
 
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const host = "http://localhost:5000";
+  // const host = process.env.REACT_APP_PORT;
+  const host = "https://vercel.live/link/i-notes-backend-2.vercel.app?via=project-dashboard-alias-list&p=1";
+  // const host = "http://localhost:5000";
 
-  const handleSubmit = async (values) => {
+  async function handleSubmit(values) {
     const { name, email, password } = values; // use destructured values from Form
 
     try {
@@ -44,7 +46,7 @@ const Signup = (props) => {
       console.error("There was a problem with the fetch operation:", error);
       props.showAlert("An error occurred. Please try again.", "danger");
     }
-  };
+  }
 
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });

@@ -4,11 +4,12 @@ const {json} = require('express');
 const authRoutes = require('./routes/auth');
 const notesRoutes = require('./routes/notes');
 const cors = require('cors');
+require('dotenv').config();
 
 
 connectToMongo();
 const app = express()
-const port = 5000
+const port = process.env.PORT;
 
 // app.use(cors({
 //   origin:[],
@@ -23,7 +24,7 @@ app.use(cors());
 // }));
 // CORS configuration
 const corsOptions = {
-  origin: ['https://i-notes-frontend.vercel.app'],
+  origin: ['https://i-notes-frontend.vercel.app', "http://localhost:3000"],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
