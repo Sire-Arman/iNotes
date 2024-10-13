@@ -15,7 +15,6 @@ const Login = (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                // Remove the hardcoded auth-token from here
             },
             body: JSON.stringify({ 
                 email: credentials.email, 
