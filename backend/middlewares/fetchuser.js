@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
-const JWt_secret = "armanistheOG@";
+require('dotenv').config();
+const JWt_secret = process.env.JWT_SECRET;
+// const JWt_secret ="armanistheOG@";
+console.log(process.env.JWT_SECRET)
 
 // next is used to call the following funtion after this function is called for fetching the user
 const fetchuser = (req, res, next) => {

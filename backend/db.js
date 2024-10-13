@@ -1,8 +1,8 @@
 // import { connect } from 'mongoose';
 const mongoose = require('mongoose');
 const { MongoClient, ServerApiVersion } = require('mongodb');
-""
-const uri = "mongodb+srv://Arman:mongodbatlas@cluster0.ybxuraw.mongodb.net/inotes?retryWrites=true&w=majority&appName=Cluster0";
+require('dotenv').config();
+const uri = process.env.MONGO_URI;
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -11,8 +11,6 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   } 
 });
-// const mongoURI= "mongodb://127.0.0.1:27017/inotes";
-
 const connectToMongo=()=>{
     // mongoose.connect(mongoURI);
     mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
